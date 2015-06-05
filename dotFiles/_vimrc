@@ -62,9 +62,18 @@ set mouse=a
 set history=1000
 set undolevels=1000
 
+"Backup stuff for windows
+
+
 set nobackup
 set noswapfile
+set dir=%TMP%
+set backupdir=%TMP%
 
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+  autocmd GUIEnter * set visualbell t_vb=
+endif
 "jedi-vim stuff
 let g:jedi#force_py_version = 2
 
@@ -75,7 +84,7 @@ map <F4> <ESC>:NERDTree w:\<RETURN>
 
 
 " Do not display the end of the line
-set list
+set nolist
 
 
 "indentLine settings
@@ -100,3 +109,12 @@ nnoremap <C-H> <C-W><C-H>
 "ctrl + w |
 "Normalize all split sizes, which is very handy when resizing terminal
 "ctrl + w =
+
+
+"Some headers for python files
+autocmd bufnewfile *.py so C:\Users\florin.neacsu\Vim\py_header.txt
+"autocmd bufnewfile *.py exe "1," . 10 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.py exe "1," . 10 . "g/Created on:.*/s//Created on: " .strftime("%b %d %Y")
+autocmd Bufwritepre,filewritepre *.py execute "normal ma"
+autocmd Bufwritepre,filewritepre *.py exe "1," . 10 . "g/Last modified:.*/s/Last modified:.*/Last modified: " .strftime("%b %d %Y, %X")
+autocmd bufwritepost,filewritepost *.py execute "normal `a"
