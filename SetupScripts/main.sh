@@ -13,13 +13,13 @@ printf "Hello\n"
 #Check if curl is installed, if not, install it
 if ! command -v curl >/dev/null; then
   fancy_echo "Installing curl ... "
-    apt-get install curl
+    apt-get install -y curl
 fi
 
 #Check if git is installed
 if ! command -v git >/dev/null; then
 	fancy_echo "Installing git ..."
-	apt-get install git
+	apt-get install -y git
 fi
 
 
